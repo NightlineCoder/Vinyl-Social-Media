@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "project3",
+=======
+  "name": "music-social-media",
+>>>>>>> main
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
