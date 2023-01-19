@@ -1,10 +1,10 @@
 const { Schema, model } = require("mongoose");
 // const dateFormat = require('../utils/dateFormat');
 
-const thoughtSchema = new Schema({
+const noteSchema = new Schema({
   // CODE GOES HERE
 });
 
-const Thought = model("Thought", thoughtSchema);
+const note = model("note", noteSchema);
 
-module.exports = Thought;
+module.exports = note;
