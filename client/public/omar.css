@@ -1,0 +1,38 @@
+img {
+    width: 250px;
+    height: 250px;
+}
+
+#root {
+    position: relative;
+}
+
+.search-form {
+    position: absolute;
+    left: 50%;
+    top: 8rem;
+    transform: translate(-50%, 130%);
+}
+
+.recent-tab {
+    display: flex;
+    justify-content: flex-end;
+}
+
+section {
+    width: 950px;
+    margin: 0 auto;
+    /* center the section */
+    background-color: #d2d9f9;
+    /* add a background color */
+    padding: 20px;
+    /* add padding to the section */
+    border-radius: 10px;
+    /* add rounded corners to the section */
+    box-shadow: 2px 2px 10px #ccc;
+    /* add a box shadow to the section */
+}
+
+.card-body {
+    background: #d2d9f9;
+}
