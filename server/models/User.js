@@ -6,14 +6,14 @@ const userSchema = new Schema(
     // CODE GOES HERE
     username: {
       type: String,
-      Unique: true,
-      Required: true,
+      unique: true,
+      required: true,
       trim: true,
     },
     email: {
       type: String,
-      Required: true,
-      Unique: true,
+      required: true,
+      unique: true,
       match: [
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please fill a valid email address",
@@ -21,7 +21,7 @@ const userSchema = new Schema(
     },
     password: {
       type: String,
-      Required: true,
+      required: true,
       minlength: 8,
     },
 
@@ -29,6 +29,12 @@ const userSchema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "User",
+      },
+    ],
+    notes: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Notes",
       },
     ],
   },
@@ -48,6 +54,10 @@ userSchema.pre("save", async function (next) {
 
   next();
 });
+
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = model("User", userSchema);
 
