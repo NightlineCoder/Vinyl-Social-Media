@@ -1,12 +1,16 @@
+img {
+    width: 250px;
+    height: 250px;
+}
+
 #root {
     position: relative;
-    
 }
 
 .search-form {
     position: absolute;
     left: 50%;
-    top: 19rem;
+    top: 8rem;
     transform: translate(-50%, 130%);
 }
 
@@ -15,14 +19,11 @@
     justify-content: flex-end;
 }
 
-.search-form{
-    top: 10 rem;
-}
 section {
-    width: 600px;
+    width: 950px;
     margin: 0 auto;
     /* center the section */
-    background-color: #5373fb;
+    background-color: #d2d9f9;
     /* add a background color */
     padding: 20px;
     /* add padding to the section */
@@ -32,6 +33,6 @@ section {
     /* add a box shadow to the section */
 }
 
-.card-body{
-    background: #5373fb;
+.card-body {
+    background: #d2d9f9;
 }
