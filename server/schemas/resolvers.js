@@ -10,7 +10,7 @@ const resolvers = {
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("posts");
+      return User.findOne({ username }).populate("notes");
     },
 
     posts: async (parent, { username }) => {
@@ -24,7 +24,7 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        return User.findOne({ _id: context.user._id }).populate("notes");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -62,23 +62,20 @@ const resolvers = {
       return user;
     },
 
-    addPost: async (parent, { postText, userId }, context) => {
-      // If userId exists, use User to find by id and update
-      try {
-        if (userId) {
-          const user = await User.findOneAndUpdate(
-            { _id: userId },
-            { $addToSet: { posts: postText } },
-            { new: true }
-          );
+    addPost: async (parent, { postText }, context) => {
+      if (context.user) {
+        const post = await Post.create({
+          postText,
+        });
 
-          const token = await signToken(user);
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { posts: post._id } }
+        );
 
-          return { token, user };
-        }
-      } catch (err) {
-        throw err;
+        return post;
       }
+      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };
