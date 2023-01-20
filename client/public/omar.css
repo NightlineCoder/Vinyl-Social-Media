@@ -157,4 +157,8 @@ label,
 .login-btn {
     color: white;
     font-family: 'Open Sans', sans-serif;
+    display: block;
+        /* add this */
+        margin: 10px auto;
+        /* add this */
 }
