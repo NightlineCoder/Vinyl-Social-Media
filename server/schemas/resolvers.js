@@ -10,7 +10,7 @@ const resolvers = {
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("posts");
+      return User.findOne({ username }).populate("notes");
     },
 
     posts: async (parent, { username }) => {
@@ -24,7 +24,7 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        return User.findOne({ _id: context.user._id }).populate("notes");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -40,13 +40,13 @@ const resolvers = {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError("No user found with this email address");
+        throw new AuthenticationError("Email or password is incorrect");
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError("Incorrect credentials");
+        throw new AuthenticationError("Email or password is incorrect");
       }
 
       const token = signToken(user);
@@ -66,7 +66,6 @@ const resolvers = {
       if (context.user) {
         const post = await Post.create({
           postText,
-          postAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(

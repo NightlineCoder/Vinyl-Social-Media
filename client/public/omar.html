@@ -51,7 +51,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
- var loginOpen = false;
+    var loginOpen = false;
 
     // Get the login button by its id
     var loginBtn = document.getElementById("loginBtn");
@@ -86,6 +86,11 @@
             // Append the label and input to the form
             form.appendChild(passwordLabel);
             form.appendChild(passwordInput);
+            // Create a login button and style it
+            var loginSubmit = document.createElement("button");
+            loginSubmit.innerHTML = "Log In";
+            loginSubmit.classList.add("login-btn");
+            form.appendChild(loginSubmit);
             // Append the form to the window
             window.appendChild(form);
             // Add the window to the document
