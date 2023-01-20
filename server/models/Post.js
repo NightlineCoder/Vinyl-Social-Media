@@ -24,6 +24,11 @@ const postSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "Post",
+      // type: String,
+      required: "Comments can't be empty!",
+      minlength: 1,
+      maxlength: 300,
+      trim: true,
     },
   ],
 });
