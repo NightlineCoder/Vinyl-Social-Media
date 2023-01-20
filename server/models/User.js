@@ -31,10 +31,10 @@ const userSchema = new Schema(
         ref: "User",
       },
     ],
-    notes: [
+    posts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Notes",
+        ref: "Post",
       },
     ],
   },

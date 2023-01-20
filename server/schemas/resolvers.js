@@ -62,21 +62,23 @@ const resolvers = {
       return user;
     },
 
-    addPost: async (parent, { postText }, context) => {
-      if (context.user) {
-        const post = await Post.create({
-          postText,
-          postAuthor: context.user.username,
-        });
+    addPost: async (parent, { postText, userId }, context) => {
+      // If userId exists, use User to find by id and update
+      try {
+        if (userId) {
+          const user = await User.findOneAndUpdate(
+            { _id: userId },
+            { $addToSet: { posts: postText } },
+            { new: true }
+          );
 
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
-        );
+          const token = await signToken(user);
 
-        return post;
+          return { token, user };
+        }
+      } catch (err) {
+        throw err;
       }
-      throw new AuthenticationError("You need to be logged in!");
     },
   },
 };

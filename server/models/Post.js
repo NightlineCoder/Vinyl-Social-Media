@@ -5,7 +5,7 @@ const postSchema = new Schema({
   // CODE GOES HERE
   postText: {
     type: String,
-    required: "Posts can't be empty!",
+    required: "Notes can't be empty!",
     minlength: 1,
     maxlength: 300,
     trim: true,
