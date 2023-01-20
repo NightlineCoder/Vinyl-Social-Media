@@ -1,16 +1,16 @@
 const { Schema, model } = require("mongoose");
 // const dateFormat = require('../utils/dateFormat');
 
-const noteSchema = new Schema({
+const postSchema = new Schema({
   // CODE GOES HERE
-  thoughtText: {
+  postText: {
     type: String,
-    required: "Notes can't be empty!",
+    required: "Posts can't be empty!",
     minlength: 1,
     maxlength: 300,
     trim: true,
   },
-  thoughtAuthor: {
+  postAuthor: {
     type: String,
     required: true,
     trim: true,
@@ -23,11 +23,11 @@ const noteSchema = new Schema({
   comments: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Note",
+      ref: "Post",
     },
   ],
 });
 
-const Note = model("Note", noteSchema);
+const Post = model("Post", postSchema);
 
-module.exports = Note;
+module.exports = Post;

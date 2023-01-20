@@ -7,15 +7,15 @@ const typeDefs = gql`
     email: String!
     password: String!
     friends: [User]
-    notes: [Note]
+    posts: [Post]
   }
 
-  type Note {
+  type Post {
     _id: ID
-    noteText: String
-    noteAuthor: String
+    postText: String
+    postAuthor: String
     createdAt: String
-    comments: [Note]
+    comments: [Post]
   }
 
   type Auth {
@@ -26,8 +26,8 @@ const typeDefs = gql`
   type Query {
     users: [User]
     user(username: String!): User
-    notes(username: String): [Note]
-    note(noteId: ID!): Note
+    posts(username: String): [Post]
+    post(postId: ID!): Post
     me: User
   }
 
@@ -35,7 +35,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addFriend(userId: ID!, friendId: ID!): User
-    addNote(noteText: String!): Note
+    addPost(postText: String!): Post
   }
 `;
 

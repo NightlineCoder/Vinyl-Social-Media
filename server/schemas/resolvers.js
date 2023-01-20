@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Note } = require("../models");
+const { User, Post } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -10,21 +10,21 @@ const resolvers = {
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("notes");
+      return User.findOne({ username }).populate("posts");
     },
 
-    notes: async (parent, { username }) => {
+    posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Note.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 });
     },
 
-    note: async (parent, { noteId }) => {
-      return Note.findOne({ _id: noteId });
+    post: async (parent, { postId }) => {
+      return Post.findOne({ _id: postId });
     },
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("notes");
+        return User.findOne({ _id: context.user._id }).populate("posts");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -62,19 +62,19 @@ const resolvers = {
       return user;
     },
 
-    addNote: async (parent, { noteText }, context) => {
+    addPost: async (parent, { postText }, context) => {
       if (context.user) {
-        const note = await Note.create({
-          noteText,
-          noteAuthor: context.user.username,
+        const post = await Post.create({
+          postText,
+          postAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { notes: note._id } }
+          { $addToSet: { posts: post._id } }
         );
 
-        return note;
+        return post;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
