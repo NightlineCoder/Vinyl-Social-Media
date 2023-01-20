@@ -26,6 +26,10 @@ const postSchema = new Schema({
       ref: "Post",
     },
   ],
+  likes: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Post = model("Post", postSchema);
