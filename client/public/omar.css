@@ -1,3 +1,7 @@
+body {
+    background-color: #5170fd;
+}
+
 img {
     width: 250px;
     height: 250px;
@@ -35,4 +39,48 @@ section {
 
 .card-body {
     background: #d2d9f9;
+}
+.login-window {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    /* remove rounded corners */
+    width: 700px;
+    /* set a fixed width */
+    height: 420px;
+    /* set a fixed height */
+    z-index: 1;
+    /* ensure the window is on top of other elements */
+}
+
+/* Add a class to the body to dim/blur the background */
+.dim-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* add a semi-transparent black background */
+    position: relative;
+}
+
+
+
+
+.login-window {
+    transition: all 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.login-window {
+    animation: slideIn 0.5s ease;
 }
