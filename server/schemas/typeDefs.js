@@ -15,7 +15,7 @@ const typeDefs = gql`
     noteText: String
     noteAuthor: String
     createdAt: String
-    comments: [Note]!
+    comments: [Note]
   }
 
   type Auth {
