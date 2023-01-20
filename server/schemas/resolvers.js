@@ -10,7 +10,7 @@ const resolvers = {
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("notes");
+      return User.findOne({ username }).populate("posts");
     },
 
     posts: async (parent, { username }) => {
@@ -24,7 +24,7 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("notes");
+        return User.findOne({ _id: context.user._id }).populate("posts");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -66,11 +66,28 @@ const resolvers = {
       if (context.user) {
         const post = await Post.create({
           postText,
+          postAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { posts: post._id } }
+        );
+
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    removePost: async (parent, { postId }, context) => {
+      if (context.user) {
+        const post = await Post.findOneAndDelete({
+          _id: postId,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { posts: post._id } }
         );
 
         return post;
