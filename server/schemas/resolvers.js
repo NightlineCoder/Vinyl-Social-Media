@@ -64,6 +64,14 @@ const resolvers = {
       return user;
     },
 
+    removeFriend: async (parent, { userId, friendId }) => {
+      let user = await User.findOneAndUpdate(
+        { _id: userId },
+        { $pull: { friends: friendId } }
+      ).populate("friends");
+      return user;
+    },
+
     addPost: async (parent, { postText }, context) => {
       if (context.user) {
         const post = await Post.create({
