@@ -59,7 +59,8 @@ const resolvers = {
     addFriend: async (parent, { userId, friendId }) => {
       let user = await User.findOneAndUpdate(
         { _id: userId },
-        { $addToSet: { friends: friendId } }
+        { $addToSet: { friends: friendId } },
+        { new: true }
       ).populate("friends");
       return user;
     },
@@ -67,7 +68,8 @@ const resolvers = {
     removeFriend: async (parent, { userId, friendId }) => {
       let user = await User.findOneAndUpdate(
         { _id: userId },
-        { $pull: { friends: friendId } }
+        { $pull: { friends: friendId } },
+        { new: true }
       ).populate("friends");
       return user;
     },
@@ -81,7 +83,8 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
+          { $addToSet: { posts: post._id } },
+          { new: true }
         );
 
         return post;
@@ -97,7 +100,8 @@ const resolvers = {
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { posts: post._id } }
+          { $pull: { posts: post._id } },
+          { new: true }
         );
 
         return post;
