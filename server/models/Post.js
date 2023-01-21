@@ -12,7 +12,6 @@ const postSchema = new Schema({
   },
   postAuthor: {
     type: String,
-    // required: true,
     trim: true,
   },
   createdAt: {
