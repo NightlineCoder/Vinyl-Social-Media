@@ -56,22 +56,27 @@ const resolvers = {
       return { token, user };
     },
 
-    addFriend: async (parent, { userId, friendId }) => {
-      let user = await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { friends: friendId } },
-        { new: true }
-      ).populate("friends");
-      return user;
+    addFriend: async (parent, { userId, friendId }, context) => {
+      if (context.user) {
+        let user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate("friends");
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
     },
 
-    removeFriend: async (parent, { userId, friendId }) => {
-      let user = await User.findOneAndUpdate(
-        { _id: userId },
-        { $pull: { friends: friendId } },
-        { new: true }
-      ).populate("friends");
-      return user;
+    removeFriend: async (parent, { userId, friendId }, context) => {
+      if (context.user) {
+        let user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { friends: friendId } },
+          { new: true }
+        ).populate("friends");
+        return user;
+      }
     },
 
     addPost: async (parent, { postText }, context) => {
