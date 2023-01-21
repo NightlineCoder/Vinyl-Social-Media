@@ -65,6 +65,7 @@ const resolvers = {
         ).populate("friends");
         return user;
       }
+
       throw new AuthenticationError("You need to be logged in!");
     },
 
@@ -80,6 +81,7 @@ const resolvers = {
     },
 
     addPost: async (parent, { postText }, context) => {
+      console.log(context);
       if (context.user) {
         const post = await Post.create({
           postText,
