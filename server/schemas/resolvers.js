@@ -6,11 +6,11 @@ const resolvers = {
   // CODE GOES HERE
   Query: {
     users: async () => {
-      return User.find({}).populate("friends");
+      return User.find({}).populate("friends").populate("posts");
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("posts");
+      return User.findOne({ username }).populate("friends").populate("posts");
     },
 
     posts: async (parent, { username }) => {
@@ -24,7 +24,9 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("posts");
+        return User.findOne({ _id: context.user._id })
+          .populate("friends")
+          .populate("posts");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
