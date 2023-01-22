@@ -65,6 +65,7 @@ const resolvers = {
         ).populate("friends");
         return user;
       }
+
       throw new AuthenticationError("You need to be logged in!");
     },
 
@@ -80,6 +81,7 @@ const resolvers = {
     },
 
     addPost: async (parent, { postText }, context) => {
+      console.log(context);
       if (context.user) {
         const post = await Post.create({
           postText,
@@ -114,6 +116,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
+
     addComment: async (parent, { postText, postId }, context) => {
       if (context.user) {
         const post = await Post.create({
@@ -132,6 +135,31 @@ const resolvers = {
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
+
+    // add likes functionality
+    addLikes: async (parent, { postId }) => {
+      const likes = await Post.findOneAndUpdate(
+        {
+          _id: postId,
+        },
+        { $inc: { likes: 1 } },
+        { new: true }
+      );
+
+      return likes;
+    },
+
+    removeLikes: async (parent, { postId }) => {
+      const likes = await Post.findOneAndUpdate(
+        {
+          _id: postId,
+        },
+        { $inc: { likes: -1 } },
+        { new: true }
+      );
+
+      return likes;
+
     },
   },
 };

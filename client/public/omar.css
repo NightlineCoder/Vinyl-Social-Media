@@ -1,5 +1,6 @@
 body {
-    animation: color-shift 15s ease-in-out infinite;
+    animation: color-shift 5s ease-in-out infinite;
+    background-color: rgba(0, 0, 0, 0.725);
 }
 
 .search-icon {
@@ -24,20 +25,7 @@ position: relative;
     transform: scale(1.1);
     /* increase the size of the icon on hover */
 }
-/* Define the keyframes for the animation */
-@keyframes color-shift {
-    0% {
-        background-color: #5170fd;
-    }
 
-    50% {
-        background-color: #99ACFF;
-    }
-
-    100% {
-        background-color: #5170FD;
-    }
-}
 
 img {
     width: 250px;
@@ -75,7 +63,9 @@ section {
 }
 
 .card-body {
-    background: #d2d9f9;
+    background-color: #d2d9f9;
+    position: sticky;
+    top: 0;
 }
 .login-window {
     position: fixed;
@@ -204,4 +194,9 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
     display: none;
     /* remove the x button on the search input */
+}
+.btn-secondary {
+    color: #f8f9fa;
+    background-color: #0087ff;
+    border-color: #008aff;
 }

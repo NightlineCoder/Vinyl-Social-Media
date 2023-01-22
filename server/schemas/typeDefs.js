@@ -16,6 +16,7 @@ const typeDefs = gql`
     postAuthor: String
     createdAt: String
     comments: [Post]
+    likes: String
   }
 
   type Auth {
@@ -38,7 +39,12 @@ const typeDefs = gql`
     removeFriend(userId: ID!, friendId: ID!): User
     addPost(postText: String!): Post
     removePost(postId: ID!): Post
+
     addComment(postText: String!, postId: ID!): Post
+
+    addLikes(postId: ID!): Post
+    removeLikes(postId: ID!): Post
+
   }
 `;
 
