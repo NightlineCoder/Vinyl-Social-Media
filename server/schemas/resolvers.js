@@ -115,6 +115,30 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+    // add likes functionality
+    addLikes: async (parent, { postId }) => {
+      const likes = await Post.findOneAndUpdate(
+        {
+          _id: postId,
+        },
+        { $inc: { likes: 1 } },
+        { new: true }
+      );
+
+      return likes;
+    },
+
+    removeLikes: async (parent, { postId }) => {
+      const likes = await Post.findOneAndUpdate(
+        {
+          _id: postId,
+        },
+        { $inc: { likes: -1 } },
+        { new: true }
+      );
+
+      return likes;
+    },
   },
 };
 
