@@ -1,5 +1,42 @@
 body {
-    background-color: #5170fd;
+    animation: color-shift 15s ease-in-out infinite;
+}
+
+.search-icon {
+    width: 20px;
+    /* adjust the size of the icon */
+    height: 20px;
+    cursor: pointer;
+    /* change cursor to pointer on hover */
+    transition: all 0.2s ease;
+    /* add a transition effect */
+position: relative;
+    left: -36px;
+}
+.invisible-btn {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    /* remove padding */
+}
+.search-icon:hover {
+    transform: scale(1.1);
+    /* increase the size of the icon on hover */
+}
+/* Define the keyframes for the animation */
+@keyframes color-shift {
+    0% {
+        background-color: #5170fd;
+    }
+
+    50% {
+        background-color: #99ACFF;
+    }
+
+    100% {
+        background-color: #5170FD;
+    }
 }
 
 img {
@@ -45,7 +82,7 @@ section {
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #000000;
+    background: #D2D9F9;
     padding: 20px;
     border-radius: 15px;
     /* remove rounded corners */
@@ -67,7 +104,6 @@ section {
 
 
 
-
 .login-window {
     transition: all 0.5s ease;
     animation: fadeIn 0.5s ease;
@@ -75,17 +111,20 @@ section {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 5px #D2D9F9;
+
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
     }
-
+    
     to {
         opacity: 1;
     }
 }
+
 
 .close-btn {
     background-color: #f44336;
@@ -144,7 +183,7 @@ input[type="password"]:focus {
 }
 
 .login-btn:hover {
-    background-color: #3e8e41;
+    background-color: #5170FD;
     /* dark green */
     box-shadow: 2px 2px 4px #ccc;
 }
@@ -153,12 +192,16 @@ input[type="password"]:focus {
     transform: scale(1.1);
     box-shadow: 2px 2px 2px #ccc;
 }
-label,
-.login-btn {
-    color: white;
+label {
+    color: black;
     font-family: 'Open Sans', sans-serif;
     display: block;
-        /* add this */
-        margin: 10px auto;
-        /* add this */
+    margin: 10px auto;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+    /* remove the x button on the search input */
 }

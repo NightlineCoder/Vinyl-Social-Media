@@ -6,11 +6,11 @@ const resolvers = {
   // CODE GOES HERE
   Query: {
     users: async () => {
-      return User.find({}).populate("friends");
+      return User.find({}).populate("friends").populate("posts");
     },
 
     user: async (parent, { username }) => {
-      return User.findOne({ username }).populate("notes");
+      return User.findOne({ username }).populate("friends").populate("posts");
     },
 
     posts: async (parent, { username }) => {
@@ -24,7 +24,9 @@ const resolvers = {
 
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id }).populate("notes");
+        return User.findOne({ _id: context.user._id })
+          .populate("friends")
+          .populate("posts");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
@@ -54,23 +56,40 @@ const resolvers = {
       return { token, user };
     },
 
-    addFriend: async (parent, { userId, friendId }) => {
-      let user = await User.findOneAndUpdate(
-        { _id: userId },
-        { $addToSet: { friends: friendId } }
-      ).populate("friends");
-      return user;
+    addFriend: async (parent, { userId, friendId }, context) => {
+      if (context.user) {
+        let user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: { friends: friendId } },
+          { new: true }
+        ).populate("friends");
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    removeFriend: async (parent, { userId, friendId }, context) => {
+      if (context.user) {
+        let user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { friends: friendId } },
+          { new: true }
+        ).populate("friends");
+        return user;
+      }
     },
 
     addPost: async (parent, { postText }, context) => {
       if (context.user) {
         const post = await Post.create({
           postText,
+          postAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { posts: post._id } }
+          { $addToSet: { posts: post._id } },
+          { new: true }
         );
 
         return post;
@@ -78,19 +97,39 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    addComment: async (parent, { postText }, context) => {
+    removePost: async (parent, { postId }, context) => {
       if (context.user) {
-        const comment = await Post.create({
+        const post = await Post.findOneAndDelete({
+          _id: postId,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { posts: post._id } },
+          { new: true }
+        );
+
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+
+    addComment: async (parent, { postText, postId }, context) => {
+      if (context.user) {
+        const post = await Post.create({
           postText,
           postAuthor: context.user.username,
         });
 
         await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { comments: comment._id } }
+          { $addToSet: { posts: post._id } }
         );
-
-        return comment;
+        await Post.findByIdAndUpdate(
+          { _id: postId },
+          { $addToSet: { comments: post._id } }
+        );
+        return post;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
