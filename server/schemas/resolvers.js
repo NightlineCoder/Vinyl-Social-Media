@@ -15,11 +15,11 @@ const resolvers = {
 
     posts: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+      return Post.find(params).sort({ createdAt: -1 }).populate("comments");
     },
 
     post: async (parent, { postId }) => {
-      return Post.findOne({ _id: postId });
+      return Post.findOne({ _id: postId }).populate("comments");
     },
 
     me: async (parent, args, context) => {
@@ -116,7 +116,6 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-
     addComment: async (parent, { postText, postId }, context) => {
       if (context.user) {
         const post = await Post.create({
@@ -135,7 +134,7 @@ const resolvers = {
         return post;
       }
       throw new AuthenticationError("You need to be logged in!");
-
+    },
     // add likes functionality
     addLikes: async (parent, { postId }) => {
       const likes = await Post.findOneAndUpdate(
@@ -159,7 +158,6 @@ const resolvers = {
       );
 
       return likes;
-
     },
   },
 };
