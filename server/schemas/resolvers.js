@@ -115,6 +115,27 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
+
+    addComment: async (parent, { postText, postId }, context) => {
+      if (context.user) {
+        const post = await Post.create({
+          postText,
+          postAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { posts: post._id } }
+        );
+        await Post.findByIdAndUpdate(
+          { _id: postId },
+          { $addToSet: { comments: post._id } }
+        );
+        return post;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+
     // add likes functionality
     addLikes: async (parent, { postId }) => {
       const likes = await Post.findOneAndUpdate(
@@ -138,6 +159,7 @@ const resolvers = {
       );
 
       return likes;
+
     },
   },
 };
