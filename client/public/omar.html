@@ -14,7 +14,7 @@
     <title>Tech Matchup App</title>
 </head>
 
-<body>
+<body class="normal-focus">
 <div class="d-flex flex-column" style="min-height: 100vh">
     <header class="card bg-light">
         <div class="card-body d-flex justify-content-between">
@@ -55,66 +55,65 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
     var loginOpen = false;
-
-    // Get the login button by its id
     var loginBtn = document.getElementById("loginBtn");
 
-    // Add a click event listener to the login button
     loginBtn.addEventListener("click", function () {
         if (!loginOpen) {
-            // Create a div element for the window
-            var window = document.createElement("div");
-            // Add a class for styling
-            window.classList.add("login-window");
-            // Add a close button
-            var closeBtn = document.createElement("button");
-            closeBtn.innerHTML = "X";
-            closeBtn.classList.add("close-btn");
-            window.appendChild(closeBtn);
-            // Create a form element
-            var form = document.createElement("form");
-            // Create a label and input element for the username
-            var usernameLabel = document.createElement("label");
-            usernameLabel.innerHTML = "Username: ";
-            var usernameInput = document.createElement("input");
-            usernameInput.type = "text";
-            // Append the label and input to the form
-            form.appendChild(usernameLabel);
-            form.appendChild(usernameInput);
-            // Create a label and input element for the password
-            var passwordLabel = document.createElement("label");
-            passwordLabel.innerHTML = "Password: ";
-            var passwordInput = document.createElement("input");
-            passwordInput.type = "password";
-            // Append the label and input to the form
-            form.appendChild(passwordLabel);
-            form.appendChild(passwordInput);
-            // Create a login button and style it
-            var loginSubmit = document.createElement("button");
-            loginSubmit.innerHTML = "Log In";
-            loginSubmit.classList.add("login-btn");
-            form.appendChild(loginSubmit);
-            // Append the form to the window
-            window.appendChild(form);
-            // Add the window to the document
-            document.body.appendChild(window);
-            // Animate the window
-            window.classList.add("slideIn");
-            // Update the loginOpen variable
+            createLoginWindow();
+            document.body.classList.add("bg-blur");
             loginOpen = true;
         }
     });
 
-    // Add a click event listener to the close button to remove the window
     document.addEventListener("click", function (event) {
         if (event.target.classList.contains("close-btn")) {
-            event.target.parentNode.classList.remove("slideIn");
-            setTimeout(function () {
-                event.target.parentNode.remove();
-            }, 500);
+            closeLoginWindow(event);
+            document.body.classList.remove("bg-blur");
             loginOpen = false;
         }
     });
+
+    function createLoginWindow() {
+        var window = document.createElement("div");
+        window.classList.add("login-window");
+
+        var closeBtn = document.createElement("button");
+        closeBtn.innerHTML = "X";
+        closeBtn.classList.add("close-btn");
+        window.appendChild(closeBtn);
+
+        var form = document.createElement("form");
+
+        var usernameLabel = document.createElement("label");
+        usernameLabel.innerHTML = "Username: ";
+        var usernameInput = document.createElement("input");
+        usernameInput.type = "text";
+        form.appendChild(usernameLabel);
+        form.appendChild(usernameInput);
+
+        var passwordLabel = document.createElement("label");
+        passwordLabel.innerHTML = "Password: ";
+        var passwordInput = document.createElement("input");
+        passwordInput.type = "password";
+        form.appendChild(passwordLabel);
+        form.appendChild(passwordInput);
+
+        var loginSubmit = document.createElement("button");
+        loginSubmit.innerHTML = "Log In";
+        loginSubmit.classList.add("login-btn");
+        form.appendChild(loginSubmit);
+
+        window.appendChild(form);
+        document.body.appendChild(window);
+        window.classList.add("slideIn");
+    }
+
+    function closeLoginWindow(event) {
+        event.target.parentNode.classList.remove("slideIn");
+        setTimeout(function () {
+            event.target.parentNode.remove();
+        }, 500);
+    }
 </script>
         </body>
         
