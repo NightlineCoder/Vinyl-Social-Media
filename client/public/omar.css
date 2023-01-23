@@ -1,4 +1,9 @@
 body {
+    /* background-color: #5170fd; */
+}
+header{
+    display: flex;
+    position: sticky;
     animation: color-shift 5s ease-in-out infinite;
     background-color: rgba(0, 0, 0, 0.725);
 }
@@ -28,12 +33,39 @@ position: relative;
 
 
 img {
-    width: 250px;
-    height: 250px;
+    width: 15.625rem;
+    height: 15.625rem;
+}
+.icon{
+    margin: -2.5rem;
+    width: 9%;
+    height: 6%;
 }
 
+.Hashtag{
+    display: flex;
+    justify-content: flex-start;
+    margin-right: 53rem;
+    width: 5.313rem;
+    height: 4.68rem;
+ }
+
+ .card-body{
+    display: flex;
+    align-items: center;
+     padding: 0.5rem 1.563rem;
+
+
+ }
 #root {
     position: relative;
+}
+
+
+svg{
+   display: flex;
+   margin: -2.2rem;
+   margin-bottom: -18%;
 }
 
 .search-form {
@@ -49,12 +81,13 @@ img {
 }
 
 section {
-    width: 950px;
+    width: 59.375rem;
+    
     margin: 0 auto;
     /* center the section */
     background-color: #d2d9f9;
     /* add a background color */
-    padding: 20px;
+    padding: 30px;
     /* add padding to the section */
     border-radius: 10px;
     /* add rounded corners to the section */
