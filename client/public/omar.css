@@ -4,7 +4,33 @@ body {
 header{
     display: flex;
     position: sticky;
+    animation: color-shift 5s ease-in-out infinite;
+    background-color: rgba(0, 0, 0, 0.725);
 }
+
+.search-icon {
+    width: 20px;
+    /* adjust the size of the icon */
+    height: 20px;
+    cursor: pointer;
+    /* change cursor to pointer on hover */
+    transition: all 0.2s ease;
+    /* add a transition effect */
+position: relative;
+    left: -36px;
+}
+.invisible-btn {
+    background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    /* remove padding */
+}
+.search-icon:hover {
+    transform: scale(1.1);
+    /* increase the size of the icon on hover */
+}
+
 
 img {
     width: 15.625rem;
@@ -70,14 +96,16 @@ section {
 }
 
 .card-body {
-    background: #d2d9f9;
+    background-color: #d2d9f9;
+    position: sticky;
+    top: 0;
 }
 .login-window {
     position: fixed;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    background: #D2D9F9;
     padding: 20px;
     border-radius: 15px;
     /* remove rounded corners */
@@ -87,6 +115,7 @@ section {
     /* set a fixed height */
     z-index: 1;
     /* ensure the window is on top of other elements */
+    
 }
 
 /* Add a class to the body to dim/blur the background */
@@ -98,21 +127,109 @@ section {
 
 
 
-
 .login-window {
     transition: all 0.5s ease;
+    animation: fadeIn 0.5s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 5px #D2D9F9;
+
 }
 
-@keyframes slideIn {
+@keyframes fadeIn {
     from {
-        transform: translateY(-100%);
+        opacity: 0;
     }
-
+    
     to {
-        transform: translateY(0);
+        opacity: 1;
     }
 }
 
-.login-window {
-    animation: slideIn 0.5s ease;
+
+.close-btn {
+    background-color: #f44336;
+    /* red */
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px #f44336;
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    box-shadow: 0px 0px 15px #f44336;
+    transform: rotate(45deg);
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border: 2px solid #4CAF50;
+    /* green */
+    outline: none;
+}
+
+.login-btn {
+    background-color: #6c757d;
+    /* green */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.2s ease;
+    transform: scale(1);
+    box-shadow: 2px 2px 2px #ccc;
+}
+
+.login-btn:hover {
+    background-color: #5170FD;
+    /* dark green */
+    box-shadow: 2px 2px 4px #ccc;
+}
+
+.login-btn:active {
+    transform: scale(1.1);
+    box-shadow: 2px 2px 2px #ccc;
+}
+label {
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    margin: 10px auto;
+}
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+    /* remove the x button on the search input */
+}
+.btn-secondary {
+    color: #f8f9fa;
+    background-color: #0087ff;
+    border-color: #008aff;
 }

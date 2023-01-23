@@ -13,8 +13,12 @@
     <link rel="stylesheet" href="./omar.css">
     <title>Tech Matchup App</title>
 </head>
+
 <body>
 <div class=" nav d-flex flex-column" style="min-height: 100vh">
+
+<body class="normal-focus">
+<div class="d-flex flex-column" style="min-height: 100vh">
     <header class="card bg-light">
         <div class="card-body d-flex justify-content-between">
             <img class="icon d-flex" src="icon-removebg-preview.png" alt="">
@@ -28,10 +32,20 @@
                 <img src="./fotor_2023-1-18_18_12_1.png" alt="Tech Matchup logo"
                     class="img-responsive align-self-center">
                 <form class="form-inline my-2 my-lg-0 search-form">
+
                     <input class="form-control mr-sm-2" type="search" placeholder="Search Vinyl" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                       </svg>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <a href="#" class="invisible-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="search-icon bi bi-search"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </a>
+                    
                 </form>
             </div>
         </section>
@@ -41,6 +55,7 @@
         <div class="card-body d-flex justify-content-between">
             <button class="btn btn-secondary" id="loginBtn">Log In</button>
             <button class="btn btn-secondary">Sign Up</button>
+            
         </div>
         
     </footer>
@@ -52,62 +67,66 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script>
- var loginOpen = false;
-
-    // Get the login button by its id
+    var loginOpen = false;
     var loginBtn = document.getElementById("loginBtn");
 
-    // Add a click event listener to the login button
     loginBtn.addEventListener("click", function () {
         if (!loginOpen) {
-            // Create a div element for the window
-            var window = document.createElement("div");
-            // Add a class for styling
-            window.classList.add("login-window");
-            // Add a close button
-            var closeBtn = document.createElement("button");
-            closeBtn.innerHTML = "X";
-            closeBtn.classList.add("close-btn");
-            window.appendChild(closeBtn);
-            // Create a form element
-            var form = document.createElement("form");
-            // Create a label and input element for the username
-            var usernameLabel = document.createElement("label");
-            usernameLabel.innerHTML = "Username: ";
-            var usernameInput = document.createElement("input");
-            usernameInput.type = "text";
-            // Append the label and input to the form
-            form.appendChild(usernameLabel);
-            form.appendChild(usernameInput);
-            // Create a label and input element for the password
-            var passwordLabel = document.createElement("label");
-            passwordLabel.innerHTML = "Password: ";
-            var passwordInput = document.createElement("input");
-            passwordInput.type = "password";
-            // Append the label and input to the form
-            form.appendChild(passwordLabel);
-            form.appendChild(passwordInput);
-            // Append the form to the window
-            window.appendChild(form);
-            // Add the window to the document
-            document.body.appendChild(window);
-            // Animate the window
-            window.classList.add("slideIn");
-            // Update the loginOpen variable
+            createLoginWindow();
+            document.body.classList.add("bg-blur");
             loginOpen = true;
         }
     });
 
-    // Add a click event listener to the close button to remove the window
     document.addEventListener("click", function (event) {
         if (event.target.classList.contains("close-btn")) {
-            event.target.parentNode.classList.remove("slideIn");
-            setTimeout(function () {
-                event.target.parentNode.remove();
-            }, 500);
+            closeLoginWindow(event);
+            document.body.classList.remove("bg-blur");
             loginOpen = false;
         }
     });
+
+    function createLoginWindow() {
+        var window = document.createElement("div");
+        window.classList.add("login-window");
+
+        var closeBtn = document.createElement("button");
+        closeBtn.innerHTML = "X";
+        closeBtn.classList.add("close-btn");
+        window.appendChild(closeBtn);
+
+        var form = document.createElement("form");
+
+        var usernameLabel = document.createElement("label");
+        usernameLabel.innerHTML = "Username: ";
+        var usernameInput = document.createElement("input");
+        usernameInput.type = "text";
+        form.appendChild(usernameLabel);
+        form.appendChild(usernameInput);
+
+        var passwordLabel = document.createElement("label");
+        passwordLabel.innerHTML = "Password: ";
+        var passwordInput = document.createElement("input");
+        passwordInput.type = "password";
+        form.appendChild(passwordLabel);
+        form.appendChild(passwordInput);
+
+        var loginSubmit = document.createElement("button");
+        loginSubmit.innerHTML = "Log In";
+        loginSubmit.classList.add("login-btn");
+        form.appendChild(loginSubmit);
+
+        window.appendChild(form);
+        document.body.appendChild(window);
+        window.classList.add("slideIn");
+    }
+
+    function closeLoginWindow(event) {
+        event.target.parentNode.classList.remove("slideIn");
+        setTimeout(function () {
+            event.target.parentNode.remove();
+        }, 500);
+    }
 </script>
 </body>
         
