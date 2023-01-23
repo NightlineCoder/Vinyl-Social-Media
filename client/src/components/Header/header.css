@@ -5,10 +5,5 @@
   padding: 18px 10px;
   color: #fff;
   font-size: 24px;
-}
-
-ul {
-  display: flex;
-  gap: 24px;
-  list-style-type: none;
+  min-height: 20px;
 }

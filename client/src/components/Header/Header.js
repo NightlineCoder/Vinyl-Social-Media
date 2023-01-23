@@ -3,13 +3,19 @@ import "./header.css";
 
 function Header() {
   return (
-    <div className="header">
-      <h2>Logo</h2>
-      <ul>
-        <li>Sign Up !!</li>
-        <li>Login !!</li>
-      </ul>
-    </div>
+    <header className="bg-info p-3 d-flex justify-content-around">
+      <h2>VINYL</h2>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
+    </header>
   );
 }
 
