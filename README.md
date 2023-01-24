@@ -58,4 +58,4 @@ Omar Yassine - Frontend
 
 [Vinyl App](https://github.com/NightlineCoder/Vinyl-Social-Media)
 
-![Project Demo](./Assets/appDemo.png)
+![Project Demo](./assets/appDemo.png)
