@@ -2,16 +2,17 @@ import React from "react";
 // import "./header.css";
 import { Typography, Box, Container, TextField } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import { Link } from "react-router-dom";
 
 import logo from "../../assets/logo.cropped.png";
 
 const Nav = () => {
   return (
-    <Grid container sx={{ backgroundColor: "primary.main", mt: 1 }}>
+    <Grid container sx={{ backgroundColor: "primary.main", pt: 1 }}>
       <Grid xs={12}>
-        <Typography variant="h3" component="h1" color="#F2F7F2">
-          {logo}
-        </Typography>
+        <Link to="/">
+          <img src={logo} alt="Vinyl logo" />
+        </Link>
       </Grid>
     </Grid>
   );
