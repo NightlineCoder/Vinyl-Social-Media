@@ -4,12 +4,15 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./pages/Home";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import theme from "./theme";
+
 // Main GraphQL endpoint
 let httpLink = createHttpLink({
 	uri: "/graphql",
@@ -34,14 +37,15 @@ const client = new ApolloClient({
 const App = () => {
 	return (
 		<ApolloProvider client={client}>
-			<div className="App">
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
 				<Router>
 					<Nav />
 					<Routes>
 						<Route path="/" element={<Home />} />
 					</Routes>
 				</Router>
-			</div>
+			</ThemeProvider>
 		</ApolloProvider>
 	);
 };
