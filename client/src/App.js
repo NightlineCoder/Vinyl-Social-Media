@@ -11,6 +11,8 @@ import "./App.css";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -49,9 +51,9 @@ const App = () => {
           <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
-          {/* If signed in, footer does not appear */}
-          <Footer />
         </Router>
       </ThemeProvider>
     </ApolloProvider>
