@@ -8,7 +8,12 @@ const Footer = () => {
   return (
     <Grid
       container
-      sx={{ backgroundColor: "primary.main", py: 1, mt: 3 }}
+      sx={{
+        backgroundColor: "primary.main",
+        justifyContent: "center",
+        py: 1,
+        mt: 3,
+      }}
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       <Grid xs={2}>

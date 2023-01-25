@@ -8,7 +8,10 @@ import logo from "../../assets/logo.cropped.png";
 
 const Nav = () => {
   return (
-    <Grid container sx={{ backgroundColor: "primary.main", pt: 1 }}>
+    <Grid
+      container
+      sx={{ backgroundColor: "primary.main", justifyContent: "center", pt: 1 }}
+    >
       <Grid xs={12}>
         <Link to="/">
           <img src={logo} alt="Vinyl logo" />

@@ -50,6 +50,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
+          {/* If signed in, footer does not appear */}
           <Footer />
         </Router>
       </ThemeProvider>
