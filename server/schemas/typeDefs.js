@@ -28,6 +28,7 @@ const typeDefs = gql`
     users: [User]
     user(username: String!): User
     posts(username: String): [Post]
+    userPosts: [Post]
     post(postId: ID!): Post
     me: User
   }
@@ -44,7 +45,6 @@ const typeDefs = gql`
 
     addLikes(postId: ID!): Post
     removeLikes(postId: ID!): Post
-
   }
 `;
 
