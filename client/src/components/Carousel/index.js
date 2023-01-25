@@ -18,12 +18,16 @@ import carouselImg3 from "../../assets/vinyl.img.3.jpg";
 const CarouselComp = (props) => {
   var items = [
     {
-      name: "Random Name #1",
-      description: "Probably the most random thing you have ever seen!",
+      src: carouselImg1,
+      alt: "Probably the most random thing you have ever seen!",
     },
     {
-      name: "Random Name #2",
-      description: "Hello World!",
+      src: carouselImg2,
+      alt: "Probably the most random thing you have ever seen!",
+    },
+    {
+      src: carouselImg3,
+      alt: "Probably the most random thing you have ever seen!",
     },
   ];
 
@@ -39,9 +43,7 @@ const CarouselComp = (props) => {
 function Item(props) {
   return (
     <Paper>
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-
+      <img src={props.item.src} alt={props.item.alt} />
       <Button className="CheckButton">Check it out!</Button>
     </Paper>
   );
