@@ -54,6 +54,7 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>
+          <Footer />
         </Router>
       </ThemeProvider>
     </ApolloProvider>

@@ -5,7 +5,10 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../utils/queries";
 import { useParams } from "react-router-dom";
+
 import auth from "../utils/auth.js";
+
+import Carousel from "../components/Carousel";
 
 const Home = () => {
   const { userId } = useParams();
@@ -23,9 +26,7 @@ const Home = () => {
   return (
     <Grid container>
       <Box elevation={2}>
-        <Typography variant="h1" component="h1">
-          blah
-        </Typography>
+        <Carousel />
       </Box>
     </Grid>
   );
