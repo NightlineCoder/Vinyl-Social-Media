@@ -1,124 +1,123 @@
 import { gql } from "@apollo/client";
 
-export const ADD_POST = gql`
-  mutation addPost($postText: String!) {
-    addPost(postText: $postText) {
-      _id
-      postText
-      createdAt
-      postAuthor
-    }
-  }
-`;
-// addUser(username: String!, email: String!, password: String!): Auth
-//     login(email: String!, password: String!): Auth
-//     addFriend(userId: ID!, friendId: ID!): User
-//     removeFriend(userId: ID!, friendId: ID!): User
-//     addPost(postText: String!): Post
-//     removePost(postId: ID!): Post
-
-//     addComment(postText: String!, postId: ID!): Post
-
-//     addLikes(postId: ID!): Post
-//     removeLikes(postId: ID!): Post
+// TODO: mutations needed:
+//
+// .addUser
+// .login
+// .addPost
+// .removePost
+// .addComment
+// .addLikes
+// .removeLikes
+// .addFriend
+// .removeFriend
+//
+//
+//
+//
 
 export const ADD_USER = gql`
-  mutation Mutation($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        username
-        email
-        _id
-        password
-        posts {
-          postText
-          _id
-        }
-      }
-    }
-  }
+	mutation addUser($username: String!, $email: String!, $password: String!) {
+		addUser(username: $username, email: $email, password: $password) {
+			token
+			user {
+				_id
+				email
+				password
+				username
+			}
+		}
+	}
 `;
 
 export const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        _id
-      }
-    }
-  }
+	mutation login($email: String!, $password: String!) {
+		login(email: $email, password: $password) {
+			token
+			user {
+				_id
+				email
+				password
+				username
+			}
+		}
+	}
 `;
 
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
+export const ADD_POST = gql`
+	mutation addPost($postText: String!) {
+		addPost(postText: $postText) {
+			_id
+			createdAt
+			likes
+			postAuthor
+			postText
+		}
+	}
+`;
 
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
+export const REMOVE_POST = gql`
+	mutation removePost($postId: ID!) {
+		removePost(postId: $postId) {
+			_id
+			postAuthor
+			postText
+		}
+	}
+`;
+export const ADD_COMMENT = gql`
+	mutation addComment($postText: String!, $postId: ID!) {
+		addComment(postText: $postText, postId: $postId) {
+			_id
+			createdAt
+			postAuthor
+			postText
+		}
+	}
+`;
 
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
+export const ADD_LIKE = gql`
+	mutation addLikes($postId: ID!) {
+		addLikes(postId: $postId) {
+			_id
+			postAuthor
+		}
+	}
+`;
 
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
-
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
-
-// export const ADD_USER = gql`
-//   mutation createVote($_id: String!, $techNum: Int!) {
-//     createVote(_id: $_id, techNum: $techNum) {
-//       _id
-//       tech1
-//       tech2
-//       tech1_votes
-//       tech2_votes
-//     }
-//   }
-// `;
+export const REMOVE_LIKE = gql`
+	mutation removeLikes($postId: ID!) {
+		removeLikes(postId: $postId) {
+			_id
+			postAuthor
+		}
+	}
+`;
+export const ADD_FRIEND = gql`
+	mutation addFriend($userId: ID!, $friendId: ID!) {
+		addFriend(userId: $userId, friendId: $friendId) {
+			_id
+			username
+			posts {
+				_id
+				likes
+				postAuthor
+				postText
+				comments {
+					_id
+					likes
+					postAuthor
+					postText
+				}
+			}
+		}
+	}
+`;
+export const REMOVE_FRIEND = gql`
+	mutation removeFriend($userId: ID!, $friendId: ID!) {
+		removeFriend(userId: $userId, friendId: $friendId) {
+			_id
+			username
+		}
+	}
+`;
