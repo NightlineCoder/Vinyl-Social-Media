@@ -8,7 +8,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Nav from "./components/Nav/Nav";
+import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import "@fontsource/roboto/300.css";
