@@ -48,13 +48,6 @@ export const ADD_POST = gql`
 	mutation addPost($postText: String!) {
 		addPost(postText: $postText) {
 			_id
-			comments {
-				_id
-				createdAt
-				likes
-				postAuthor
-				postText
-			}
 			createdAt
 			likes
 			postAuthor
